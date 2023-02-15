@@ -1,0 +1,36 @@
+{
+  "name": "react-chariot-connect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/cjs/index.tsx",
+  "module": "./dist/esm/index.tsx",
+  "types": "./dist/esm/index.d.tsx",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run prettier && npm run lint"
+  },
+  "keywords": [],
+  "author": "Chariot Giving",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.0.12",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "typescript": "^4.7.3"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abbyjng/react-chariot-connect.git"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ]
+}
