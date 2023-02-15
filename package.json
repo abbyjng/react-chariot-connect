@@ -1,10 +1,10 @@
 {
   "name": "react-chariot-connect",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
-  "main": "./dist/cjs/index.tsx",
-  "module": "./dist/esm/index.tsx",
-  "types": "./dist/esm/index.d.tsx",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "scripts": {
     "build": "yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
