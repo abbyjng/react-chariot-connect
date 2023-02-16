@@ -1,26 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 
-type Props = {
-    value?: number
+type ChariotConnectProps = {
+    cid: string
 }
-const MyCounter = ({ value = 0 }: Props) => {
-    const [counter, setCounter] = useState(value);
+const ChariotConnect: React.FC<ChariotConnectProps> = ({
+    cid
+}) => {
+    useEffect(() => {
+        const script = document.createElement('script');
 
-    const onMinus = () => {
-        setCounter((prev) => prev - 1)
-    };
+        script.src = "https://cdn.givechariot.com/chariot-connect.umd.js";
+        script.async = true;
 
-    const onPlus = () => {
-        setCounter((prev) => prev + 1)
-    };
+        document.body.appendChild(script);
+
+        const connect = document.createElement('chariot-connect') as any;
+        connect.setAttribute('cid', cid);
+
+        const connectContainer = document.getElementById('connectContainer');
+        connectContainer?.appendChild(connect)
+
+        const loadConnect = async () => {
+            // wait for chariot.onDonationRequest to be available as a function
+            while (typeof connect.onDonationRequest !== "function") {
+                console.log(
+                    "waiting for chariot.onDonationRequest to be available"
+                );
+                await new Promise((resolve) => setTimeout(resolve, 100));
+            }
+        }
+
+        loadConnect();
+
+        connect.onDonationRequest(async () => {
+            return {};
+        });
+
+        return () => {
+            document.body.removeChild(script);
+            connectContainer?.removeChild(connect);
+        }
+    }, []);
 
     return (
-        <div>
-            <h1>Counter: {counter}</h1>
-            <button onClick={onMinus}>-</button>
-            <button onClick={onPlus}>+</button>
+        <div id="connectContainer">
         </div>
     )
 }
 
-export default MyCounter
+export default ChariotConnect
