@@ -20,6 +20,8 @@ const ChariotConnect: React.FC<ChariotConnectProps> = ({
     useEffect(() => {
         const script = document.createElement('script');
 
+        // change this to https://cdn.givechariot.com/chariot-connect.umd.js
+        // once CHARIOT_INIT event is added to prod
         script.src = "http://127.0.0.1:5173/dist/chariot-connect.umd.js";
         script.async = true;
 
